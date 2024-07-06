@@ -1,4 +1,5 @@
 from AVL_BST_Tree import AVL_BST_Tree
+import sys
 
 class Set(AVL_BST_Tree):
     def __init__(self, allowDuplicates = False):
@@ -28,6 +29,9 @@ class Set(AVL_BST_Tree):
         return node
     
     def end(self):
+        if self.root == None:
+            return None
+        
         node = self.root
 
         while node.right != None:
@@ -67,20 +71,12 @@ class Set(AVL_BST_Tree):
 
 def main():
     obj = Set(allowDuplicates = False)
-    obj.insert(50)
-    obj.insert(75)
-    obj.insert(75)
-    obj.insert(25)
-    obj.insert(25)
-    obj.insert(30)
-    obj.insert(6)
-    obj.insert(60)
-    obj.insert(70)
-    obj.insert(52)
-
-    while obj.begin():
-        print(obj.begin().value)
-        obj.delete(node = obj.begin())
+    print(sys.getsizeof(obj))
+    obj.insert(46)
+    obj.insert(47)
+    obj.insert(48)
+    obj.insert(49)
+    print(sys.getsizeof(obj))
 
     
 
