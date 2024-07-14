@@ -218,7 +218,7 @@ class AVL_BST_Tree:
     def add(self, value):
         if self.root == None:
             self.root = Node(value)
-            return
+            return True
         
         parent = self.root
         while True:
@@ -249,9 +249,10 @@ class AVL_BST_Tree:
                     break
         
         if parent == None:
-            return
+            return False
         else:
             self.checkBalanceFactors(parent, value = value)
+            return True
     
     def traverse(self, node = None, initialCall = True):
         if initialCall:

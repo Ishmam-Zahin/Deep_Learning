@@ -2,16 +2,30 @@ from AVL_BST_Tree import AVL_BST_Tree
 import sys
 
 class Set(AVL_BST_Tree):
+    x = 0
     def __init__(self, allowDuplicates = False):
         super().__init__(allowDuplicates = allowDuplicates)
         self.size = 0
+        self._currentNode = None
+    
+    def __iter__(self):
+        self._currentNode = self.begin()
+        return self
+    
+    def __next__(self):
+        if self._currentNode == None:
+            raise StopIteration
+        else:
+            tmp = self._currentNode.value
+            self._currentNode = self.nextNode(self._currentNode)
+            return tmp
     
     def getSize(self):
         return self.size
     
     def insert(self, value):
-        self.add(value)
-        self.size += 1
+        if self.add(value):
+            self.size += 1
     
     def delete(self, *, node = None, value = None):
         if self.remove(node = node, value = value):
@@ -71,12 +85,17 @@ class Set(AVL_BST_Tree):
 
 def main():
     obj = Set(allowDuplicates = False)
-    print(sys.getsizeof(obj))
+
     obj.insert(46)
     obj.insert(47)
     obj.insert(48)
-    obj.insert(49)
-    print(sys.getsizeof(obj))
+    obj.insert(47)
+
+    for i in obj:
+        print(i)
+    for i in obj:
+        print(i)
+
 
     
 

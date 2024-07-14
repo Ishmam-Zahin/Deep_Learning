@@ -36,11 +36,20 @@ class And(Symbol):
     
     def evaluate(self):
         tmpValue = True
+        # print(len(self.symbols))
         for symbol in self.symbols:
             symbol.evaluate()
             tmpValue = tmpValue and symbol.value
         
         self.value = tmpValue
+    
+    def add(self, symbol):
+        if self.name:
+            self.name += f" ^ {symbol.name}"
+        else:
+            self.name = symbol.name
+        self.symbols = self.symbols + (symbol, )
+        self.evaluate()
 
 
 class Or(Symbol):
@@ -50,7 +59,7 @@ class Or(Symbol):
         for i, symbol in enumerate(symbols):
             tmpName += symbol.name
             if(i < (len(symbols) - 1)):
-                tmpName += " ^ "
+                tmpName += " v "
 
         super().__init__(tmpName)
         self.evaluate()
@@ -87,6 +96,7 @@ class Implication(Symbol):
 
 def modelCheck(kb, target, symbols):
     length = len(symbols)
+    # print(length)
     x = 2 ** length
     kbCount = 0
     targetCount = 0
@@ -105,7 +115,7 @@ def modelCheck(kb, target, symbols):
             else:
                 targetCount -= 1
         
-    if (kbCount == targetCount):
+    if (kbCount == targetCount) and kbCount > 0:
         return 1
     elif (kbCount + targetCount == 0):
         return -1
@@ -118,19 +128,12 @@ def modelCheck(kb, target, symbols):
 
 
 def main():
-    rain = Symbol("it is rainning")
-    hagrid = Symbol("hagrid")
-    dumbledore = Symbol("dumbledore")
+    obj1 = {"name": "zahin", "age": 23}
+    obj2 = obj1
 
-    knowledge = And(
-    Implication(Not(rain), hagrid),
-    Or(hagrid, dumbledore),
-    Not(And(hagrid, dumbledore)),
-    dumbledore
-    )
+    del obj1
 
-    print(modelCheck(knowledge, rain, [rain, hagrid, dumbledore]))
-
+    print(obj2)
 
 
 if __name__ == "__main__":
