@@ -57,15 +57,15 @@ class TicTacToe:
         return value
     
     def getValue(self):
-        if self.board[0][0] == self.board[1][1] and self.board[1][1] == self.board[2][2]:
+        if self.board[0][0] == self.board[1][1] and self.board[1][1] == self.board[2][2] and self.board[0][0] != 0:
             return self.board[0][0]
-        if self.board[0][2] == self.board[1][1] and self.board[1][1] == self.board[2][0]:
+        if self.board[0][2] == self.board[1][1] and self.board[1][1] == self.board[2][0] and self.board[0][2] != 0 :
             return self.board[0][2]
         for j in range(3):
-            if self.board[0][j] == self.board[1][j] and self.board[1][j] == self.board[2][j]:
+            if self.board[0][j] == self.board[1][j] and self.board[1][j] == self.board[2][j] and self.board[0][j] != 0:
                 return self.board[0][j]
         for i in range(3):
-            if self.board[i][0] == self.board[i][1] and self.board[i][1] == self.board[i][2]:
+            if self.board[i][0] == self.board[i][1] and self.board[i][1] == self.board[i][2] and self.board[i][0] != 0:
                 return self.board[i][0]
         
         return 0

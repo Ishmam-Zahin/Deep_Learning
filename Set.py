@@ -84,15 +84,13 @@ class Set(AVL_BST_Tree):
 
 
 def main():
-    obj = Set(allowDuplicates = False)
+    obj = Set(allowDuplicates = True)
 
     obj.insert(46)
     obj.insert(47)
     obj.insert(48)
     obj.insert(47)
 
-    for i in obj:
-        print(i)
     for i in obj:
         print(i)
 
